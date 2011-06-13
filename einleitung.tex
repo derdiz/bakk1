@@ -1,0 +1,131 @@
+
+
+\chapter{Einleitung}
+%=================================================
+
+\section{Allgemeines}
+\label{sec:1einleitung}
+
+
+\vspace{0.5cm}
+
+
+\par Aufgrund des täglich steigenden Datenaufkommens und der damit verbundenen benötigten Infrastruktur, besteht ein Wettbewerb zwischen 
+den Datennetz-Anbietern. Existierende Datennetze werden von Errichtern vielfach auch an konkurrierende Anbieter vermietet, da es nicht lukrativ wäre, wenn
+jeder Anbieter sein eigenes Netzwerk errichten würde. Hierfür werden Mietgebühren verlangt, welche von der Austrian Regulation Authority for Broadcasting 
+and Telecommunications (RTR), festgelegt werden. 
+Da die tatsächlichen Kosten der bereits bestehenden Infrastruktur, die für diese Verkabelung von der Telekom Austria angefallen sind, nicht mehr nachvollziehbar 
+sind, werden Modelle benötigt, welche eine völlig neue Verkabelung oder verschiedene Szenarien eines Ausbaues simulieren, um einen fairen Preis festlegen
+zu können.
+Bislang existierende Modelle besitzen einen hohen Abstraktionsgrad, das bedeutet, dass die Ergebnisse nur schwer in die realen Gegebenheiten
+übertragen werden können. Deshalb sind sie weder für Netzwerk-Errichter noch für Regulatoren von großem Nutzen, da sie nicht für eine 
+Grobplanung oder eine Modellierung herangezogen werden können. Die Ergebnisse solcher Programme sollten für die Festlegung der Mietkosten herangezogen
+werden können oder einer Investitionsabschätzung dienlich sein.
+\par Darum wurde ein Programm, namens RTR\_R2008a, entwickelt und implementiert. Dieses liefert Ergebnisse, die den realen Umständen nahekommen.
+Jedoch beinhaltet das Programm noch Schwachstellen, wie zum Beispiel eine nicht vorhandene Begrenzung der maximal zulässigen Kabellängen, die es zu 
+beseitigen gilt\cite{pinkafeld1}. 
+
+%=================================================
+\section{Umfeld}
+\label{sec:1einleitung}
+
+
+\vspace{0.5cm}
+
+\par Das Programm RTR\_R2008a unterteilt Wählamtsbereiche in Sub-Bereiche. Ein Wählamts-bereich der Telekom Austria ist ein geographisches Gebiet, 
+welches von einem Verteilzentrum, dem Wählamt, Endteilnehmer mit Datenleitungen versorgt. 
+\\Die Größenbestimmung dieser Sub-Bereiche geschieht in
+einem parametrierbaren Cluster-Modell des Programms. 
+Diese Parameter sind der maximale/absolute Informations(gehalt) bzw. -bedarf und die maximale/absolute Dilatation.
+Der Informationsbedarf beschreibt die Anbindung an das Netzwerk. Diese kann mit Kupfer-oder Lichtwellenleitern
+erfolgen. Wird die Anbindung mit Kupferkabeln vorgenommen, entspricht der Informationsbedarf der Anzahl der benötigten Kupferleiter. 
+Werden Glasfasern verwendet, so gibt der Informationsbedarf die Anzahl der benötigten Wellenlängen eines Lichtwellenleiters wieder. Bestimmt wird 
+der Informationsgehalt auf Basis der Mikrozellendaten. 
+
+\vspace{0.5cm}
+
+Die Dilatation eines Wählamtsbereiches ist die maximale, euklidische Distanz, über alle möglichen
+Anschlussobjekt-Paarungen.
+Nicht berücksichtigt wird die maximal mögliche Versorgungslänge von der Quelle (Distribution Center) zur Senke (Anschlussobjekt). 
+Es besteht ein Zusammenhang zwischen Parametereinstellungen im Cluster Modell und der daraus resultierenden, maximalen Versorgungslänge in den 
+Sub-Bereichen.
+Jedoch können über entsprechende Modellparameter keine Einschränkungen bezüglich der maximal möglichen Versorgungslängen im Cluster Modell getätigt
+werden\cite{tech_rep_1}.
+
+Es wird ein Abbild der Trassenführung mittels eines Objektes, bestehend aus Knoten und Kanten erzeugt.  Dieses Objekt ist ein Graph, 
+welcher die Wählamtsbereiche der Telekom\\ Austria simuliert und die entsprechenden Anschlussobjekte
+aufzeigt\cite{pinkafeld1}.
+\\
+
+Um das bestehende System zu optimieren, sollten die Beschränkung der maximalen Anschlusslängen bereits im Clustermodell getroffen und nicht erst 
+im rechenintensiven Routingmodell durchgeführt werden. 
+
+%=================================================
+\section{Prozessablauf}
+\label{sec:1einleitung}
+
+
+\vspace{0.5cm}
+
+
+Der Ablauf ist in mehrere Schritte und Teil-Modelle gegliedert. Die Informationen für folgendes Kapitel wurden aus \cite{pinkafeld1 } entnommen,
+sofern nicht anders angegeben. 
+
+\subsubsection{Geodaten}
+Vorab muss eine Aufbereitung der Geodaten\cite{prossegger1} erfolgen. Diese werden in einem Graphen dargestellt und als $.ist$ Dateien abgespeichert. 
+Sie dienen dem Clustermodell als Input.
+\subsubsection{Clustermodell}
+
+Im nächsten Schritt wird der Netzwerkgraph (Wählamtsbereich) in Teilgraphen aufgespalten um unterschiedliche Hierarchie-Ebenen zu erhalten. 
+Dieser Prozess wird als \textit{clustern} bezeichnet und im gleichnamigen Modell durchgeführt (Kapitel 2.1.2).  
+\vspace{0.3cm}
+
+Als Ergebnis erhalten wir unterschiedliche Hierarchieebenen:
+
+\begin{description}
+\item[Citynetzebene:] Entspricht dem Wählamtsbereich (gesamter Netzwerkgraph)
+\item[Accessnetzebene:] Teilgebiet des gesamten Wählamtsbereich 
+\item[Accesszellebene:] Gibt Gebiet der anzubindenden Endteilnehmer zu den Netzwerkverteilern wieder
+\end{description}
+
+\vspace{0.5cm}
+
+Die erhaltenen Ebenen sind wie folgt miteinander verbunden:
+
+
+\begin{description}
+\item[Citynetzebene und Accessnetzebene:] Das Wählamt wird mit Verteilern in der Accessnetz-ebene (Distribution Center) verbunden
+\item[Access(netz)-und Zellebene:] Ist die Verbindung von Distribution Center zu den Endeinrichtungen, auch als \textit{last mile} bezeichnet
+\end{description}
+
+\subsubsection{Routingmodell}
+
+
+Der Datenoutput des Clustermodells dient als Input für das Routing Modell (Kapitel 2.1.4). In diesem werden die tatsächlichen Wege für die Trassenführung
+aufgrund der Faktoren Flächennutzung und Bebauungsgrad nun abstrahiert und dargestellt.
+\\
+Der Output des Routingmodells bildet Trassenwege inklusive Anschlussobjekte ab, welche unter Rücksichtname den optimalen Kosten genügen.
+Des weiteren wird eine Auflistung der Kosten und Mengen zum Beispiel der benötigten Leitungen generiert, die als Grundlage einer Investitionsabschätzung dienen
+\cite{pinkafeld1}.
+\\
+Derzeit kann es passieren, dass sich erst nach einem gesamten Modellierungsdurchlauf eine überdurchschnittlich lange Versorgungslänge ergibt. 
+ 
+
+
+%=================================================
+\section{Aufgabenstellung}
+\label{sec:1einleitung}
+
+
+\vspace{0.5cm}
+
+In dieser Arbeit wird  eine Abschätzung getroffen,  bei welcher die maximale Versorgungslänge noch vor dem Routing Modell passiert. 
+Bisher werden im Clustermodell die maximalen Anschlusslängen nicht direkt, sondern über den Informationsbedarf und die maximale Dilatation eingeschränkt.
+Gezeigt wurde dies im Projekt \textit{Versorgungslängensensitivität} Semester IV.
+Es wird eine Implementierung benötigt, welche die maximale Anschlusslänge unmittelbar nach dem Clustermodell ermittelt und dem Routingmodell einen
+geeigneten Input liefert. 
+\\
+\textit{Ziel} ist es, vermeintliche Fehler bezüglich der Anschlusslängen bereits vor dem rechenintensivem Routingmodell zu erkennen und diese zu vermeiden.
+ Das ist ein weiterer Schritt, um das bestehende Programm zu optimieren.
+Somit ist sichergestellt, dass jede Modellierung korrekte Ergebnisse liefert.
+

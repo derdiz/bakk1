@@ -1,0 +1,21 @@
+\contentsline {chapter}{Table of Contents}{v}{section*.1}
+\contentsline {chapter}{List of Figures}{vi}{section*.3}
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}General}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Functionality}{2}{section.1.2}
+\contentsline {section}{\numberline {1.3}Problems}{2}{section.1.3}
+\contentsline {section}{\numberline {1.4}Objective}{3}{section.1.4}
+\contentsline {chapter}{\numberline {2}Software Design}{4}{chapter.2}
+\contentsline {section}{\numberline {2.1}UML}{4}{section.2.1}
+\contentsline {section}{\numberline {2.2}Class Diagrams}{4}{section.2.2}
+\contentsline {paragraph}{Note:}{5}{section*.7}
+\contentsline {section}{\numberline {2.3}Used software}{5}{section.2.3}
+\contentsline {section}{\numberline {2.4}Revision control}{5}{section.2.4}
+\contentsline {section}{\numberline {2.5}Used libraries}{9}{section.2.5}
+\contentsline {chapter}{\numberline {3}Implementation}{15}{chapter.3}
+\contentsline {section}{\numberline {3.1}Module Design}{15}{section.3.1}
+\contentsline {section}{\numberline {3.2}Functional interaction}{15}{section.3.2}
+\contentsline {section}{\numberline {3.3}Caveats}{15}{section.3.3}
+\contentsline {chapter}{\numberline {4}Software tests}{16}{chapter.4}
+\contentsline {chapter}{\numberline {5}Conclusion}{17}{chapter.5}
+\contentsline {chapter}{\numberline {A}Appendix}{18}{appendix.A}

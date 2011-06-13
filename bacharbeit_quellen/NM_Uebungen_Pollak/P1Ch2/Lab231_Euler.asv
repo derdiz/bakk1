@@ -1,0 +1,17 @@
+close all, clear all;
+
+nodes=10;
+percEdges=1; % 100% of edges randomly laid
+costRange=[0 20];
+
+[E,n,c,P] = GRand(nodes,percEdges,costRange,'euler','directed'); % 10-node graph constructed
+[I,g] = NetInc(E,n,c,'directed'); % Get incidence information (where the edges go)
+[EHdl,ETHdl,NHdl,NTHdl] = PlotGraph(E,n,P, 'directed', 'walk');
+
+% Compute Euler cycle (it is not enough just to say 'euler' when creating the graph)
+[C,CLin] = Euler(I,g);
+
+% show Euler walk
+eulerIter = E;
+
+for i = 1:

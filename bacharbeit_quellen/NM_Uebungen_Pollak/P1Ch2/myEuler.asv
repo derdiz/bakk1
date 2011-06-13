@@ -1,0 +1,5 @@
+function [C,CLin] = myEuler(I,g)
+
+cur = 
+
+end

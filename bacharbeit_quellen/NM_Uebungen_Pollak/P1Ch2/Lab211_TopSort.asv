@@ -1,0 +1,20 @@
+clear all, close all;
+
+[E,n,c,P,flag,report] = GrCstrR01(5,[],'type','directed','Econstr','topsort');
+
+AD = zeros(n,n);
+
+%AD (Adj.-Matrix) aus E (Kantenarray) erstellen (Ideen aus Seite 80)
+    for i=1:length(E)
+        u=mod(E(i),n) 
+        u(u==0)=n
+        v=(E(i)-u)/n+1
+        AD(u,v)=1
+    end;
+
+PatchGraph(E,n,P,'directed','archdstat',2,'nodenum',1:n);
+
+%[L,AD_T,acyclic] = topsort(AD);
+[L,AD_TS,acyclic] = myTopsort(AD);
+
+AD_TS

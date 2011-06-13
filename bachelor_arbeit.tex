@@ -1,0 +1,319 @@
+\documentclass[oneside,bachelor,etd]{BYUPhys}
+%\usepackage[latin1]{inputenc}
+\usepackage{ifpdf}
+\ifpdf
+  \usepackage[pdftex]{graphicx}
+\else
+  \usepackage[dvips]{graphicx}
+\fi
+\usepackage[german]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{anysize}
+\marginsize{2.5cm}{1.5cm}{1.5cm}{1.5cm}
+
+
+
+
+
+
+\usepackage{fancyhdr}
+  \fancyhead{}
+  \fancyhead[LO]{\slshape \rightmark}
+  \fancyhead[RO,LE]{\textbf{\thepage}}
+  \fancyhead[RE]{\slshape \leftmark}
+  \fancyfoot{}
+  \pagestyle{fancy}
+  \renewcommand{\chaptermark}[1]{\markboth{\chaptername \ \thechapter \ \ #1}{}}
+  \renewcommand{\sectionmark}[1]{\markright{\thesection \ \ #1}}
+
+\usepackage[margin=0.3in,labelfont=bf,labelsep=none]{caption}
+ \DeclareCaptionFormat{suggested}{\singlespace#1#2 #3\par\doublespace}
+ \captionsetup{format=suggested}
+
+\usepackage{cite}
+
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\usepackage{lmodern,dsfont}
+
+
+\usepackage{makeidx}
+\makeindex
+
+\usepackage{url}
+\urlstyle{rm}
+
+\usepackage[bookmarksnumbered,pdfpagelabels=true,plainpages=false,colorlinks=true,
+            linkcolor=black,citecolor=black,urlcolor=blue]{hyperref}
+
+\usepackage{float}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+
+\definecolor{MyGray}{rgb}{0.91,0.92,0.93}
+\usepackage{calc}
+\newsavebox{\fcolbox} \newlength{\fcolwidth}
+\newenvironment{graybox}[1][\linewidth]
+	{\setlength{\fcolwidth}{#1-2\fboxsep-2\fboxrule}%
+	 \begin{lrbox}{\fcolbox}\begin{minipage}{\fcolwidth}}
+	{\end{minipage}\end{lrbox} \noindent \colorbox{MyGray}{\usebox{\fcolbox}}}
+
+
+
+\usepackage{color}
+\usepackage{xcolor}
+\definecolor{lightgrey}{gray}{0.95}
+
+\usepackage{listings}
+\lstset{
+	language=C++,
+	basicstyle=\footnotesize,
+	backgroundcolor=\color{lightgrey},
+	rulesepcolor=\color{gray},
+	tabsize=2,
+	breaklines=true,
+	morekeywords={all},
+	literate=%
+{Ö}{{\"O}}1 
+{Ä}{{\"A}}1 
+{Ü}{{\"U}}1 
+{ß}{{\ss}}2 
+{ü}{{\"u}}1 
+{ä}{{\"a}}1 
+{ö}{{\"o}}1
+}
+\DeclareCaptionFont{white}{\color{white}}
+
+\renewcommand*{\lstlistingname}{Algorithmus}
+
+%\DeclareCaptionFont{white}{\color{white}}
+%\DeclareCaptionFormat{listing}{\colorbox{gray}{#1#2#3}}
+%\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+
+\definecolor{hellgrau}{gray}{.9}
+\usepackage{amssymb}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\linewidth+5.5\fboxsep}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\usepackage{amsmath}
+
+% ------------------------- Fill in these fields for the preliminary pages ----------------------------
+  \Year{2011}
+  \Month{January}
+  \Author{Dietmar Pichler}
+  \TitleTop{Beschränkung von Clustern }
+ \TitleBottom{ Eine Berechnungsgrundlage des Routingmodells}
+
+\Abstract{
+
+In dieser Arbeit wird ein Modell beschrieben, welches ein bestehendes und bereits implementiertes Programm (RTR\_R2008a) zu einer verbesserte
+Performance
+führen soll.
+Das Programm wurde von FH-Prof. Dipl.-Ing. Dr. Peter Bachhiesl geschrieben und berechnet eine Netzwerkinfrastruktur von Grund auf neu. 
+Die Netzwerkinfrastruktur bildet das Telekommunikationsnetz der Telekom Austria ab und ermittelt die Längen der Kabel bezüglich der Trassenführung.
+Diese Längen, werden Versorgungslängen genannt.\\
+Es wird angestrebt, dass bestehende Programm hinsichtlich der maximalen Versorgungslängen, bereits in einem frühen Stadium der Modellierung
+einzugrenzen. Somit kann in weiterer Folge sichergestellt werden, dass keine unzulässigen Versorgungslängen im Modell weiter berechnet werden.
+Werden diese Längen nicht eingeschränkt, kann es passieren, dass im letzten Schritt der Modellierung zu einer Fehlkalkulation kommt.\\
+Daraus resultierend, muss der gesamte Vorgang der Modellierung nochmals durchlaufen werden. Es kann nicht ausgeschlossen werden, dass wiederum ein Fehler
+auftritt.
+Dieses Ergebnis soll erreicht werden, durch eine Implementierung eines Testbeds.  
+Darum wird das Ziel verfolgt, dass jeder Modellierungsvorgang exakte Resultate liefert.
+ 
+
+
+\vspace{0.5cm}
+
+\textbf{Schlüsselwörter:} Versorgungslängen, Kanten, Knoten, Steiner Baum, minimal spannender Baum, Algorithmen
+
+\vspace*{1cm}
+ 
+This thesis describes a model which has already been implemented by FH-Prof. Dipl.-Ing. Dr. Peter Bachhiesl. 
+The program simulates a new data network which is based on an existing network infrastructure from the Telekom Austria. 
+However a few weaknesses are included.
+The main aim of this employment is to rise the performance by purging the weaknesses. 
+In fact, it is to find the maximum length from the distribution center to the customer.
+The goal is to isolate higher-than-average lengths in an early part of the modeling process. 
+This to make sure that every calculation is able to provide correct results.
+As a result of not limiting these lengths it could occur that the whole procedure has to be continued.
+To reach this outcome, a testbed has to be implemented.
+Therefore, every single modeling process will deliver exact findings.
+\vspace{0.5cm}
+
+\textbf{keywords:} distribution lengths, edges, nodes, Steiner tree, minimal spanning tree, algorithms
+
+}
+
+% ------------- These remaining fields are only necessary for masters and PhD ----------------------
+
+\begin{document}
+
+ % Start page counting in roman numerals
+ \frontmatter
+
+\input{title}
+\input{eidesstatth}
+
+ % This command makes the formal preliminary pages.
+ % You can comment it out during the drafting process if you want to save paper.
+\makepreliminarypages
+
+ \singlespace
+
+ % Make the table of contents.
+ \tableofcontents
+ \clearemptydoublepage
+
+ % Make the list of figures
+ \listoffigures
+ \clearemptydoublepage
+
+ \doublespace
+
+ % Start regular page counting at page 1
+ \mainmatter
+
+% --------------------------------------------------------------------------
+
+\input{einleitung}
+
+% --------------------------------------------------------------------------
+
+\input{Methoden}
+
+% --------------------------------------------------------------------------
+
+\input{Ergebnisse}
+
+% --------------------------------------------------------------------------
+
+\input{Conclusio}
+
+% --------------------------------------------------------------------------
+
+
+% Start labeling chapters with letters and calling them appendices
+\appendix
+
+ % -----------------------Make the bibliography-------------------------------
+\cleardoublepage
+ \phantomsection \addcontentsline{toc}{chapter}{Literaturverzeichnis}
+ \begin{thebibliography}{00}
+ 
+\bibitem{pinkafeld1}
+ Bachhiesl,P.,et al;{\em  Bottom up Kostenmodellierung von Hybridnetzen }
+ 
+\bibitem{tech_rep_1}
+ Bachhiesl,P.,et al; {\em Model-and parameter description for the bottom-up network simulaion tool RTR\_R2008a-Technical Report}, (Peter Bachhiesl)
+
+\bibitem{bachhiesl2}
+ Bachhiesl,P.; {\em Skriptum zur Lehrveranstaltung Mathematik III}, (Peter Bachhiesl)
+ 
+ \bibitem{bronstein}
+Bronstein,et al; {\em Taschenbuch der Mathematik},(Bronstein,) 7.Auflage, Frankfurt am Main, 2008
+
+
+ \bibitem{jungnickel1}
+Jungnickel, D.; {\em Graphs networks and algorithms}, 3. Auflage, Berlin Heidelberg, 2008
+
+
+\bibitem{krumke1}
+ Krumke,S.; Noltemeier, H.; {\em Graphentheoretische Konzepte und Algorithmen}, 2. Auflage, Wiesbaden, 2009
+  
+\bibitem{papageorgiou}
+Papageorgiou,M.; {\em Optimierung}, 2. Auflage, München, 1996
+
+\bibitem{prossegger1}
+Paulus,G., et al; {\em Entwicklung von kostenoptimierten räumlichen Szenarien für den strategischen Ausbau der Glasfasernetz-Infrastruktur am Beispiel eines Multi-Utility Unternehmens}, \ 2. Forschungsforum der österreichischen FHs,\ FFH 2008, \ 26-27 Mär 2008, \ Wels, Austria.
+ 
+\bibitem{turau1}
+ Turau,V.; {\em Algorithmische Graphentheorie}, (Volker Turau), 3. Auflage, München, 2009
+
+
+\end{thebibliography}
+
+
+%----------------------------------appendix-----------------------------------
+
+%
+%\chapter{Stichwortverzeichnis}
+%\label{sec:appendix}
+%
+%\subsection{Begriffserklärungen}
+%
+%
+%
+%
+%\begin{flushleft}
+%distribution center - Versorgungszentrum in der jeweiligen Hierarchie-Ebene 
+%\end{flushleft}
+%
+%\begin{flushleft}
+%euklidische Distanz - der  Abstand zweier Punkte einer Ebene oder eines Raumes
+%\end{flushleft}
+%
+%\begin{flushleft}
+%heuristisch: [Mathematik] unter geringem Aufwand kein optimales, aber ein meist brauchbares Ergebnis liefernd
+%\end{flushleft}
+%
+%\begin{flushleft}
+%Kanten - tatsächliche Verlegetrassen oder paarweise Verbindungen welche Knoten miteinander verbinden
+%\end{flushleft}
+%
+%\begin{flushleft}
+%Knoten - Anschlussobjekte oder Verbindungsknoten
+%\end{flushleft}
+%
+%\begin{flushleft}
+%knotendisjunkt: Wege, Pfade, Zyklen und Kreise in Graphen
+%\end{flushleft}
+%
+%\begin{flushleft}
+%spatiale Knoten - Knoten die sich aufgrund der Graphenkonstruktion ergeben, sind Verbindungsknoten ohne Informationsgehalt
+%\end{flushleft}
+%
+%\begin{flushleft}
+%Versorgungslänge in Accesszellebene- beschreibt die Distanz eines Endteilnehmers, bis zu 
+%den ihn sich am nächsten befindenden Versorgungszentrum (distribution center)
+%\end{flushleft}
+
+
+
+%	\$ git status
+%	# On branch master
+%	nothing to commit (working directory clean)
+%	\$ git branch experimental
+%	$ git checkout experimental 
+%	Switched to branch 'experimental'
+%	$ edit files ...
+%	git commit -a
+%	[experimental f4e4220] edit main
+% 	1 files changed, 7 insertions(+), 0 deletions(-)
+%	$ git checkout master
+%	Switched to branch 'master'
+%	$ git merge experimental
+%	Updating ed66c24..f4e4220
+%	Fast-forward
+%	main.c |    7 +++++++
+% 	1 files changed, 7 insertions(+), 0 deletions(-)
+%	$ git branch -d experimental 
+%	Deleted branch experimental (was f4e4220).
+%\end{lstlisting}
+
+
+ % Make the index
+ \cleardoublepage
+ \singlespace
+ % NOTE: '\phantomsection' helps get the pdf bookmark to work right. You need
+ % to put it before every manual addition to the table of contents
+ \phantomsection
+ \addcontentsline{toc}{chapter}{Index}
+ \printindex
+
+\end{document}

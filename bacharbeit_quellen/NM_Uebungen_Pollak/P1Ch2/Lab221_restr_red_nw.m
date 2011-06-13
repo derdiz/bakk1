@@ -1,0 +1,69 @@
+clear all, close all;
+
+% Originalgraph
+
+n = 6;
+[E,n,c,P]=GrCStrR01(n,[]);
+
+PlotGraph(E,n,P,'NdNum',1:n);
+
+ts=1; % Init. Timestate
+
+Pts (ts,:,1)=P(:,1); %X-Koordinaten
+Pts (ts,:,2)=P(:,2); %Y-Koordinaten
+
+for i = 1:n
+    Pts(i,:,1)= Pts (ts,:,1); % Nur die Originalmappings...
+    Pts(i,:,2)= Pts (ts,:,2); % ...sollten verändert werden.
+   
+    for j=1:n % Jetzt: in folgenden Timestates werden die Mappings beliebig verändert
+        Pts(i,j,1) = Pts(i,j,1) *rand*5;   % So werden die Mappings...
+        Pts(i,j,2) = Pts(i,j,2) *rand*5;   % ...in Zukunft aussehen.   
+    end;
+end;
+
+disp('Mappings für alle Timestates:');
+Pts
+
+%AD (Adj.-Matrix) aus E (Kantenarray) erstellen (Ideen aus Seite 80).
+    for i=1:length(E)
+        u=mod(E(i),n)% "u = mod(id,n) if mod(id,n) > 0..."
+        u(u==0)=n % "...n otherwise"
+        v=(E(i)-u)/n+1
+        AD(u,v)=1 % Nachdem man die AD ermittelt hat, kann man sie, in Truth-Table-Manier, auffüllen
+    end;
+
+    % Jetzt Anzahl an Verbindungen beschränken
+max_verb=3
+verb=0;
+for u=1:n
+    for v=1:n
+        if (verb>max_verb)
+            AD(u,v)=0;
+        end;
+        verb=verb+1;
+    end;
+end;
+AD
+
+%Aus AD wieder E erstellen:
+i=1;
+for u=1:n
+    for v=1:n
+        if (AD(u,v)==1)
+            Eneu(i)=(v-1)*n+u;
+            i=i+1;
+        end;
+    end;
+end;
+E    % Vergleich der alten und neuen Kanten
+Eneu
+
+%Time-states plotten
+for i=1:n
+    Pg(:,1)=Pts(i,:,1);
+    Pg(:,2)=Pts(i,:,2);
+    PlotGraph(Eneu,n,Pg,'NdNum',1:n); 
+    [I,g] = NetInc(E,n,c);
+    J = NetwConnRd(I,g) % Verbindungskomponente ermitteln
+end;

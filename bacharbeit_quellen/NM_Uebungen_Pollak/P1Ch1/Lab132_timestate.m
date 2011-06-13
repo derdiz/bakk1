@@ -1,0 +1,76 @@
+clear all, close all;
+
+nodes=10;
+
+[E,n,c,P]=GrCstrR01(nodes,[],'nodepos','randomized'); % 10-node graph constructed
+
+[EHdl,NHdl] = PlotGraph(E,n,P,'NdNum',1:n); 
+
+disp('Aktuelle Position Mappings:');
+P % So sehen meine Mappings jetzt aus
+
+ts=1; % Init. Timestate
+
+Pts (ts,:,1)=P(:,1); %X-Koordinaten
+Pts (ts,:,2)=P(:,2); %Y-Koordinaten
+
+for i = 1:n
+    Pts(i,:,1)= Pts (ts,:,1); % Nur die Originalmappings...
+    Pts(i,:,2)= Pts (ts,:,2); % ...sollten verändert werden.
+    for j=1:n % Jetzt: in folgenden Timestates werden die Mappings beliebig verändert
+        Pts(i,j,1) = Pts(i,j,1) *rand*5;   % So werden die Mappings...
+        Pts(i,j,2) = Pts(i,j,2) *rand*5;   % ...in Zukunft aussehen.   
+    end;
+end;
+
+disp('Mappings für alle Timestates:');
+Pts
+
+for i=1:n
+    Pg(:,1)=Pts(i,:,1); % So wird geplottet: 1. von 'Pts(it1,:,1);' mit 1. von 'Pts(it1,:,2)' (x1,y1), usw.
+    Pg(:,2)=Pts(i,:,2);
+    PlotGraph(E,n,Pg,'NdNum',1:n); % und so entstehen dann 'n' Graphen
+end
+
+% Es muss immer ein Knoten mit zwei anderen 'kommunizieren' können (nah 
+% genug sein) - deswegen wende ich Pythagoras' Theorem an, um die 
+% eucl_dist zu ermitteln und ich schaue, ob diese passt
+
+% Initiale eucl_dist:
+
+for i=1:n % For all edges
+    for j=1:n
+        if i~=j  % I am working with arcs, not vertices (don't land teice on the same place)
+            x(i,j)=P(i,1)-P(j,1); % X,Y separated, for clarity
+            y(i,j)=P(i,2)-P(j,2);
+            eucl_dist(1,1)=sqrt(x(i,j)^2+y(i,j)^2);
+        end;
+    end;
+end;
+
+for i=2:n
+    naughty=0; % Zähler für 'Schlimme'
+    good = 0;
+    for j=2:n
+        x=Pts(i-1,j,1)-Pts(i,j,1); % x, y getreent - wegen Übersichtlichkeit
+        y=Pts(i-1,j,2)-Pts(i,j,2);    
+        eucl_dist(i,j)=sqrt(x^2+y^2);
+   %Eukl. Distanz zwischen 2 Knoten in aufeinanderfolgenden Time-states berechnen.
+        if eucl_dist(i,j) > 30 % Wenn Vorgabe verletzt...
+            naughty=naughty+1;
+            Pts(i,j,1)=Pts(i-1,j,1); % ...letzten Timestate wiederherstellen
+            Pts(i,j,2)=Pts(i-1,j,2);
+        else
+            good = good +1;
+        end;
+    end;
+end;
+    disp('Anzahl Knoten, die die Vorgabe verletzen:');
+    naughty
+    
+    disp('"Gute" Knoten:');
+    good
+    
+    disp('Korrigierte Mappings der Timestates');
+    Pts
+    

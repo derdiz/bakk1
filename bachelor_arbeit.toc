@@ -1,0 +1,42 @@
+\select@language {german}
+\select@language {german}
+\select@language {german}
+\contentsline {chapter}{Inhaltsverzeichnis}{ii}{section*.1}
+\contentsline {chapter}{Abbildungsverzeichnis}{iii}{section*.3}
+\contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Allgemeines}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Umfeld}{1}{section.1.2}
+\contentsline {section}{\numberline {1.3}Prozessablauf}{2}{section.1.3}
+\contentsline {subsubsection}{Geodaten}{2}{section*.5}
+\contentsline {subsubsection}{Clustermodell}{2}{section*.6}
+\contentsline {subsubsection}{Routingmodell}{3}{section*.7}
+\contentsline {section}{\numberline {1.4}Aufgabenstellung}{3}{section.1.4}
+\contentsline {chapter}{\numberline {2}Methoden zur Absch\IeC {\"a}tzung der maximalen Versorgungsl\IeC {\"a}nge}{4}{chapter.2}
+\contentsline {section}{\numberline {2.1}Modelle}{4}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Gesamtmodell-Input Netzwerkgraph}{4}{subsection.2.1.1}
+\contentsline {subsubsection}{Workflow}{5}{section*.8}
+\contentsline {subsection}{\numberline {2.1.2}Normierte Geodaten}{5}{subsection.2.1.2}
+\contentsline {subsubsection}{Top-Down Clustering}{5}{section*.10}
+\contentsline {subsubsection}{Bottom-up Optimierung}{6}{section*.11}
+\contentsline {subsection}{\numberline {2.1.3}Cluster-Modell}{6}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}Routing-Modell}{7}{subsection.2.1.4}
+\contentsline {section}{\numberline {2.2}Mathematisches Konzept}{8}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Baum}{8}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Steiner Baum}{9}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Vorabsch\IeC {\"a}tzung \IeC {\"u}ber MST Ansatz}{9}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Leaf Backward Algorithmus}{10}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}Implementierungskonzept}{10}{subsection.2.2.5}
+\contentsline {subsection}{\numberline {2.2.6}Implementierung}{11}{subsection.2.2.6}
+\contentsline {subsubsection}{MST Algorithmus}{12}{section*.17}
+\contentsline {subsubsection}{Leaf Backward Algorithmus}{13}{section*.18}
+\contentsline {subsubsection}{Gewichteter Fl\IeC {\"a}chenschwerpunkt}{14}{section*.19}
+\contentsline {chapter}{\numberline {3}Ergebnisse}{16}{chapter.3}
+\contentsline {section}{\numberline {3.1}Auswertung der Resultate}{16}{section.3.1}
+\contentsline {section}{\numberline {3.2}Resultate Steiner Baum}{16}{section.3.2}
+\contentsline {section}{\numberline {3.3}Resultate MST}{16}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Statistische Auswertung der Resultate}{18}{subsection.3.3.1}
+\contentsline {subsubsection}{ Konfidenzintervall}{18}{section*.21}
+\contentsline {chapter}{\numberline {4}Conclusio}{21}{chapter.4}
+\contentsline {section}{\numberline {4.1} Zusammenfassung der Resultate}{21}{section.4.1}
+\contentsline {section}{\numberline {4.2} Interpretation der Ergebnisse}{21}{section.4.2}
+\contentsline {chapter}{Literaturverzeichnis}{22}{section*.23}

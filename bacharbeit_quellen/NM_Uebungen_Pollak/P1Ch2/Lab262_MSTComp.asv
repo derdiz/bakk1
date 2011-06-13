@@ -1,0 +1,51 @@
+clear all;
+close all;
+%
+% Create and visualize instances
+% ------------------------------
+[E,n,c,P] = GRand(10,0.2,[0 10]);
+[Ed,nd,cd,Pd] = GRand(10,0.8,[0 10]);
+
+[EHdl,ETHdl,NHdl,NTHdl] = PlotGraph(E,n,P,'GrColr','k');
+[EHdl,ETHdl,NHdl,NTHdl] = PlotGraph(Ed,nd,Pd,'GrColr','k');
+%
+set(NHdl,'markersize',8);
+%
+% Compute minimum spanning trees
+% ------------------------------
+u       = mod(E,n);
+u(u==0) = n;
+v       = (E-u)/n+1;
+d       = sqrt((P(u,1)-P(v,1)).^2+(P(u,2)-P(v,2)).^2);
+d       = d';
+%
+%Kruskal-Methode
+%[F1,cF1] = SpnTr(E,n,d); % Calculate Euclidean costs
+ktts = [F1,cF1] = MSFKruskal(E,n,c);
+%[F2,cF2] = SpnTr(E,n,c); % Calculate 'normal' costs
+kttd [F2,cF2] = MSFKruskal(Ed,nd,cd);
+
+%Prim-Methode
+[F3,cF3] = SpnTr(E,n,d,'Prim');
+[F4,cF4] = SpnTr(Ed,nd,cd,'Prim');
+
+stop = false;
+while ~stop,
+    disp('... in pause mode; press any key');
+    pause;
+    set(EHdl(ismember(E,F1)),'color','r');
+    set(NHdl,'color','r');
+    set(gcf,'name',['euclidean MST, costs = ',num2str(sum(cF1))]);
+    disp('... in pause mode; press any key');
+    pause;
+    set(EHdl,'color','k');
+    set(NHdl,'color','k');
+    %
+    set(EHdl(ismember(E,F2)),'color','r');
+    set(NHdl,'color','r');
+    set(gcf,'name',['predefined costs MST, costs = ',num2str(sum(cF2))]);
+    disp('... in pause mode; press any key; press Ctrl+C to terminate');
+    pause;
+    set(EHdl,'color','k');
+    set(NHdl,'color','k');
+end;

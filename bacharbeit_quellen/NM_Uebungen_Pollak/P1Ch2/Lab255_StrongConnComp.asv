@@ -1,0 +1,26 @@
+clear all;
+close all;
+
+% Read and plot network 'G02'
+[E,n,P,c]               = RdInst('G02.ist');
+[EHdl,NHdl] = PlotGraph(E,n,P,'directed','GrColr',[0.7,0.7,0.7]);
+
+% Perform DFS on that network
+[d,p,f] = FstSearch(E,n,[],'depth','directed');
+
+% Compute inverse graph
+u       = mod(E,n); 
+u(u==0) = n; % Inverted root is at end of traversal
+v       = (E-u)/n+1; % Nodes on inverted graph
+E       = (u-1)*n+v; % Edges om inverted graph
+
+% Sort, flip (because of inversion) and perform DFS (n:1 - another reason 
+% to flip) on network
+[f,r]   = sort(f);
+r       = fliplr(r);
+[d,p,f] = FstSearch(E,n,r,'depth','directed');
+
+% Get strong connectivity components
+r = find(p==0); % Array indexes where p==0
+C = cell(1,length(r)); A cell array is an array 
+V = 1:n;
